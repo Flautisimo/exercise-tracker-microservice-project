@@ -12,7 +12,9 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
-
+// Connect to the database
+let uri = 'mongodb+srv://user2:' + process.env.PW + '@cluster0.cakja.mongodb.net/fccExerciseTracker?retryWrites=true&w=majority';
+mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true });
 
 
 
