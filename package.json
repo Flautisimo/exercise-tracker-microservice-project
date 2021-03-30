@@ -9,7 +9,9 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "mongodb": "^3.6.4",
+    "mongoose": "^5.12.2"
   },
   "repository": {
     "url": "https://github.com/freeCodeCamp/boilerplate-project-exercisetracker"
