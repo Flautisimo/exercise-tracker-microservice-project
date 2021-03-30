@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const mongodb = require('mongodb')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 require('dotenv').config()
 
 app.use(cors())
