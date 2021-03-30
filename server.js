@@ -35,13 +35,16 @@ let User = mongoose.model('User', userSchema);
 
 // Create first end point
 app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (req, res) => {
-  // Create a new user and asign it to the variable newUser, take 
+  // Create a new user and asign it to the variable newUser, take parameters from the request body
   let newUser = new User({username: req.body.username});
+  // Save the new user
   newUser.save((err, savedUser) => {
     if (!err) {
       let responseObject = {};
+      // Fill in the response object with the user fields
       responseObject['username'] = savedUser.username;
       responseObject['_id'] = savedUser.id;
+      // Return a response object as JSON 
       res.json({responseObject});
     }
   });
