@@ -16,6 +16,13 @@ app.get('/', (req, res) => {
 let uri = 'mongodb+srv://user2:' + process.env.PW + '@cluster0.cakja.mongodb.net/fccExerciseTracker?retryWrites=true&w=majority';
 mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true });
 
+// Create Schema
+let exerciseSessionSchema = new mongoose.Schema({
+  description: {type: String, required: true},
+  duration: {type: Number, required: true},
+  date: String
+})
+
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {
