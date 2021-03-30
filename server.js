@@ -33,6 +33,13 @@ let userSchema = new mongoose.Schema({
 let Session = mongoose.model('Session', exerciseSessionSchema);
 let User = mongoose.model('User', userSchema);
 
+// Create first end point
+app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (req, res) => {
+  
+  
+  res.json({});
+})
+
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {
