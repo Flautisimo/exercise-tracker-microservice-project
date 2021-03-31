@@ -33,7 +33,7 @@ let userSchema = new mongoose.Schema({
 let Session = mongoose.model('Session', exerciseSessionSchema);
 let User = mongoose.model('User', userSchema);
 
-// Create first end point
+// Create first endpoint including a body parser middleware function
 app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (req, res) => {
   // Create a new user and asign it to the variable newUser, take parameters from the request body
   let newUser = new User({username: req.body.username});
@@ -49,6 +49,11 @@ app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (r
     }
   });
 });
+
+// Create another endpoint for the request of users
+app.get('/api/exercise/users', (req, res) => {
+  // 
+})
 
 
 
