@@ -95,7 +95,7 @@ app.get('/api/exercise/log', (req, res) => {
   User.findById(req.query.userId, (err, data) => {
     if (!err) {
       let responseObject = data;
-     /* responseObject['count'] = data.log.length; */
+      responseObject['count'] = data.log.length;
       res.json(responseObject);
     }
   })
