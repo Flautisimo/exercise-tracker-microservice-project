@@ -61,16 +61,20 @@ app.get('/api/exercise/users', (req, res) => {
 });
 
 app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, res) => {
-  
+  // Take data from the exercise session fields and assign it to a newSession variable
   let newSession = new Session({
     description: req.body.description,
     duration: parseInt(req.body.duration),
     date: req.body.date
   })
-  
-  if (newSession === '') {
-    
+  // If date field is empty assign the current date
+  if (newSession.date === '') {
+    newSession.date = new Date().toISOString().substring(0, 10); //Convert date to string and take only the first 10 characters 'YYYY-MM-DD'
   }
+  // Find the user to be updated with the newSession data
+  User.findByIdAndUpdate(
+    
+  )
   
   res.json({});
 })
