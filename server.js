@@ -52,8 +52,15 @@ app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (r
 
 // Create another endpoint for the request of users
 app.get('/api/exercise/users', (req, res) => {
-  // 
-})
+  // User.find() to gather all users data. Second argument takes a callback function
+  User.find({}, (err, arrayOfUsers) => {
+    if (!err) {
+      res.json(arrayOfUsers);
+    }
+  })
+});
+
+app.post('/api/exercise/add', bodyParser.url)
 
 
 
