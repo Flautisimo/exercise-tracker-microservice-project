@@ -71,10 +71,14 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   if (newSession.date === '') {
     newSession.date = new Date().toISOString().substring(0, 10); //Convert date to string and take only the first 10 characters 'YYYY-MM-DD'
   }
-  // Find the user to be updated with the newSession data
-  User.findByIdAndUpdate(
+  // Find the user to be updated with the newSession data. The function takes four arguments: 
+  // 1. The lookup criteria (use id field)
+  // 2. The change to be made (use $push to add a new 'log' field that includes the newSession data)
+  // 3. In order to update the document 'new' has to be set to true
+  
+  User.findByIdAndUpdate(req.body.id, {$push : {log: newSession}}, {new: true}, (err, updatedUser) => {
     
-  )
+  })
   
   res.json({});
 })
