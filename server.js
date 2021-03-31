@@ -94,11 +94,11 @@ app.get('/api/exercise/log', (req, res) => {
   // Find user by id using a query
   User.findById(req.query.userId, (err, data) => {
     if (!err) {
-      data['count'] = ''
-      console.log(data.length)
-      /*let responseObject = data;
+      let responseObject = {};
+      data['count'] = 1;
+      responseObject = data;
       responseObject['count'] = data.log.length;
-      res.json(responseObject);*/
+      res.json(responseObject);
     }
   })
 });
