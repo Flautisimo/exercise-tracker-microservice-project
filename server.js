@@ -96,7 +96,7 @@ app.get('/api/exercise/log', (req, res) => {
     if (!err) {
       let responseObject = data;
       responseObject['count'] = data.log.length;
-      res.json(responseObject);
+      res.json({responseObject});
     }
   })
 });
