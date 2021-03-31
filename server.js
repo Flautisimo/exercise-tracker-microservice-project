@@ -75,9 +75,11 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   // 1. The lookup criteria (use id field)
   // 2. The change to be made (use $push to add a new 'log' field that includes the newSession data)
   // 3. In order to update the document 'new' has to be set to true
-  
+  // 4. Callback function with error and updated data
   User.findByIdAndUpdate(req.body.id, {$push : {log: newSession}}, {new: true}, (err, updatedUser) => {
-    
+    let responseObject = {};
+    responseObject['_id'] = updatedUser.id;
+    responseObject['username'] = 
   })
   
   res.json({});
