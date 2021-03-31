@@ -60,6 +60,7 @@ app.get('/api/exercise/users', (req, res) => {
   })
 });
 
+// Create endpoint to take session data
 app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, res) => {
   // Take data from the exercise session fields and assign it to a newSession variable
   let newSession = new Session({
@@ -88,10 +89,17 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   })
 });
 
-
+// Create endpoint to get the user's log
 app.get('/api/exercise/log', (req, res) => {
-  
-})
+  // Find user by id using a query
+  User.findById(req.query.userId, (err, data) => {
+    if (!err) {
+      let responseObject = data;
+      responseObject['count'] = data.log.length;
+      res.json(responseObject);
+    }
+  })
+});
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {
