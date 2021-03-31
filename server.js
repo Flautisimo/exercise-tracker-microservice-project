@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 // Connect to the database
 let uri = 'mongodb+srv://user2:' + process.env.PW + '@cluster0.cakja.mongodb.net/fccExerciseTracker?retryWrites=true&w=majority';
-mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true , useUnifiedTopology: true, useFindAndModify: false });
 
 // Create Schema for the exercise sessions
 let exerciseSessionSchema = new mongoose.Schema({
