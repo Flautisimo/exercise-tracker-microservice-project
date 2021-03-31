@@ -60,7 +60,20 @@ app.get('/api/exercise/users', (req, res) => {
   })
 });
 
-app.post('/api/exercise/add', bodyParser.url)
+app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, res) => {
+  
+  let newSession = new Session({
+    description: req.body.description,
+    duration: parseInt(req.body.duration),
+    date: req.body.date
+  })
+  
+  if (newSession === '') {
+    
+  }
+  
+  res.json({});
+})
 
 
 
