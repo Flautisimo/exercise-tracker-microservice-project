@@ -76,14 +76,17 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   // 2. The change to be made (use $push to add a new 'log' field that includes the newSession data)
   // 3. In order to update the document 'new' has to be set to true
   // 4. Callback function with error and updated data
-  User.findByIdAndUpdate(req.body.id, {$push : {log: newSession}}, {new: true}, (err, updatedUser) => {
+  User.findByIdAndUpdate(req.body.userId, {$push : {log: newSession}}, {new: true}, (err, updatedUser) => {
     let responseObject = {};
     responseObject['_id'] = updatedUser.id;
-    responseObject['username'] = 
+    responseObject['username'] = updatedUser.username;
+    responseObject['date'] = new Date(newSession.date).toDateString(); // Take date from newSession and convert it to string
+    responseObject['duration'] = newSession.duration;
+    responseObject['description'] = newSession.description;
+    
+    res.json(responseObject);
   })
-  
-  res.json({});
-})
+});
 
 
 
