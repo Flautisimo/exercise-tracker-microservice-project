@@ -45,7 +45,7 @@ app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (r
       responseObject['username'] = savedUser.username;
       responseObject['_id'] = savedUser.id;
       // Return a response object as JSON 
-      res.json({responseObject});
+      res.json(responseObject);
     }
   });
 });
