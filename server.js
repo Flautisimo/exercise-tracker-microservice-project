@@ -93,9 +93,8 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   })
 });
 
-
+/*
 app.get('/api/exercise/log', (req, res) => {
-  
   
   User.findById(req.query.userId, (err, data) => {
     if (!data) {
@@ -118,22 +117,22 @@ app.get('/api/exercise/log', (req, res) => {
     }
   })
 })
+*/
 
 
-/*
 // Create endpoint to get the user's log
 app.get('/api/exercise/log', (req, res) => {
   // Find user by id using a query
   User.findById(req.query.userId, (err, data) => {
     if (!err) {
+      
+      data['logs'] = data.log.length;
       let responseObject = data;
-      const count
-      responseObject['count'] = data.log.length;
-      res.json(responseObject);
+      res.json(data);
     }
   })
 });
-*/
+
 
 
 
