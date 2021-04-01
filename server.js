@@ -94,25 +94,25 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 });
 
 
-app.get('/api/exercise.log', (req, res) => {
-  let {userId, from, to, limit} = req.query;
+app.get('/api/exercise/log', (req, res) => {
   
-  User.findById(userId, (err, data) => {
+  
+  User.findById(req.query.userId, (err, data) => {
     if (!data) {
       res.send("Unknown userId")
     } else {
       const username = data.username;
-      console.log({'from': from, 'to': to, 'limit': limit});
+
       
-      Session.find({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}).select(['_id', 'description', 'duration', 'date']).limit(+limit).exec( (err, data) => {
+      Session.find({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}).select(['id', 'description', 'duration', 'date']).limit(+limit).exec( (err, data) => {
         let customdata = data.map(session => {
           let formattedDate = new Date(session.date).toDateString();
           return {id: session.id, description: session.description, duration: session.duration, date: formattedDate};
         })
         if (!data) {
-          res.json({'userId': userId, 'username': username, 'count': 0, 'log': []});
+          res.json({'_id': userId, 'username': username, 'count': 0, 'log': []});
         } else {
-          res.json({'userId': userId, 'username': username, 'count': data.length, 'log': customdata});
+          res.json({'_id': userId, 'username': username, 'count': data.length, 'log': customdata});
         }
       })
     }
