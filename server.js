@@ -56,10 +56,9 @@ app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (r
 app.get('/api/exercise/users', (req, res) => {
   // User.find() to gather all users data. Second argument takes a callback function
   User.find({}, (err, arrayOfUsers) => {
-    if (!data) {
-      
-    }
-    if (!err) {
+    if (!arrayOfUsers) {
+      res.send("No users found")
+    } else {
       res.json(arrayOfUsers);
     }
   })
@@ -103,7 +102,8 @@ app.get('/api/exercise.log', (req, res) => {
       res.send("Unknown userId")
     } else {
       let username = data.username;
-      
+      console.log({'from': from, 'to': to, 'limit': limit});
+      Session.find({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}).select(['id', 'description', 'duration', 'date'])
     }
   })
 })
