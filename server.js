@@ -136,10 +136,7 @@ app.get('/api/exercise/log', (req, res) => {
       res.send("Unknown userId");
     } else {
       res.json({
-        _id: data.userId,
-        username: data.username,
-        count: data.log.length,
-        log: data.log
+        data
       })
     }  
   })
