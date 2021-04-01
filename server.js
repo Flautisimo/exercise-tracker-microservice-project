@@ -95,7 +95,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 
 /*
 app.get('/api/exercise/log', (req, res) => {
-  const { userId, description, duration, date };
+  const { userId, description, duration, date } = req.body;
   
   User.findById(req.query.userId, (err, data) => {
     if (!data) {
@@ -107,7 +107,7 @@ app.get('/api/exercise/log', (req, res) => {
       Session.find({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}).select(['id', 'description', 'duration', 'date']).limit(+limit).exec( (err, data) => {
         let customdata = data.map(session => {
           let formattedDate = new Date(session.date).toDateString();
-          return {id: session.id, description: session.description, duration: session.duration, date: formattedDate};
+          return {_id: session.id, description: session.description, duration: session.duration, date: formattedDate};
         })
         if (!data) {
           res.json({'_id': userId, 'username': username, 'count': 0, 'log': []});
