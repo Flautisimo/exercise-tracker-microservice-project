@@ -101,7 +101,7 @@ app.get('/api/exercise.log', (req, res) => {
     if (!data) {
       res.send("Unknown userId")
     } else {
-      let username = data.username;
+      const username = data.username;
       console.log({'from': from, 'to': to, 'limit': limit});
       
       Session.find({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}).select(['id', 'description', 'duration', 'date']).limit(+limit).exec( (err, data) => {
@@ -112,7 +112,7 @@ app.get('/api/exercise.log', (req, res) => {
         if (!data) {
           res.json({'userId': userId, 'username': username, 'count': 0, 'log': []});
         } else {
-          res.json({'userId': userId, 'username': username, 'count': 0, 'log': customdata});
+          res.json({'userId': userId, 'username': username, 'count': data.length, 'log': customdata});
         }
       })
     }
