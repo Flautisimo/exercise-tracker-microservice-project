@@ -25,7 +25,7 @@ let exerciseSessionSchema = new mongoose.Schema({
 
 // Create Schema for the users
 let userSchema = new mongoose.Schema({
-  username: {type: String, required: true},
+  username: {type: String, unique: true, required: true},
   log: [exerciseSessionSchema]
 });
 
@@ -81,7 +81,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
     let responseObject = {};
     responseObject['_id'] = updatedUser.id;
     responseObject['username'] = updatedUser.username;
-    responseObject['date'] = new Date(newSession.date).toDateString(); // Take date from newSession and convert it to string
+    responseObject['date'] = new Date(newSession.date).toDateString(); // Take date from newSession and convert it to a string
     responseObject['duration'] = newSession.duration;
     responseObject['description'] = newSession.description;
     
