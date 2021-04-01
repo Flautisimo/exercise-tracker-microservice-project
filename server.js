@@ -128,7 +128,7 @@ app.get('/api/exercise/log', (req, res) => {
       
       data['logs'] = data.log.length;
       let responseObject = data;
-      res.json(data);
+      res.json({data});
     }
   })
 });
