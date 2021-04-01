@@ -56,6 +56,9 @@ app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (r
 app.get('/api/exercise/users', (req, res) => {
   // User.find() to gather all users data. Second argument takes a callback function
   User.find({}, (err, arrayOfUsers) => {
+    if (!data) {
+      
+    }
     if (!err) {
       res.json(arrayOfUsers);
     }
@@ -91,6 +94,22 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   })
 });
 
+
+app.get('/api/exercise.log', (req, res) => {
+  let {userId, from, to, limit} = req.query;
+  
+  User.findById(userId, (err, data) => {
+    if (!data) {
+      res.send("Unknown userId")
+    } else {
+      let username = data.username;
+      
+    }
+  })
+})
+
+
+/*
 // Create endpoint to get the user's log
 app.get('/api/exercise/log', (req, res) => {
   // Find user by id using a query
@@ -102,7 +121,7 @@ app.get('/api/exercise/log', (req, res) => {
     }
   })
 });
-
+*/
 
 
 
