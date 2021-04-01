@@ -39,7 +39,9 @@ app.post('/api/exercise/new-user', bodyParser.urlencoded({ extended: false}), (r
   let newUser = new User({username: req.body.username});
   // Save the new user
   newUser.save((err, savedUser) => {
-    if (!err) {
+    if (err) {
+      res.json({'error': 'username already taken'});
+    } else {
       let responseObject = {};
       // Fill in the response object with the user fields
       responseObject['username'] = savedUser.username;
