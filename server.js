@@ -93,6 +93,12 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   })
 });
 
+
+app.post('/api/exercise/log', )
+
+
+
+
 /*
 app.get('/api/exercise/log', (req, res) => {
   const { userId, description, duration, date } = req.body;
@@ -118,7 +124,6 @@ app.get('/api/exercise/log', (req, res) => {
     }
   })
 })
-*/
 
 
 // Create endpoint to get the user's log
@@ -132,7 +137,7 @@ app.get('/api/exercise/log', (req, res) => {
     }
   })
 });
-
+*/
 
 
 
