@@ -110,7 +110,9 @@ app.get('/api/exercise.log', (req, res) => {
           return {id: session.id, description: session.description, duration: session.duration, date: formattedDate};
         })
         if (!data) {
-          
+          res.json({'userId': userId, 'username': username, 'count': 0, 'log': []});
+        } else {
+          res.json({'userId': userId, 'username': username, 'count': 0, 'log': customdata});
         }
       })
     }
