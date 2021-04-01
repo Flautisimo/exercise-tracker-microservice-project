@@ -95,6 +95,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 
 /*
 app.get('/api/exercise/log', (req, res) => {
+  const { userId, description, duration, date };
   
   User.findById(req.query.userId, (err, data) => {
     if (!data) {
