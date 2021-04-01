@@ -93,11 +93,11 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   })
 });
 
-
+/*
 app.post('/api/exercise/log', (req, res) => {
   const { userId } = req.query;
 })
-
+*/
 
 
 
@@ -132,13 +132,19 @@ app.get('/api/exercise/log', (req, res) => {
 app.get('/api/exercise/log', (req, res) => {
   // Find user by id using a query
   User.findById(req.query.userId, (err, data) => {
-    if (!err) {
-
-      res.json(data);
-    }
+    if (!data) {
+      res.send("Unknown userId");
+    } else {
+      res.json({
+        _id: data.userId,
+        username: data.username,
+        count: data.log.length,
+        log: data.log
+      })
+    }  
   })
 });
-*/
+
 
 
 
