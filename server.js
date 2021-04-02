@@ -93,6 +93,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   })
 });
 
+/*
 // Custom function
 const getSessionFromUserId = (id) => Session.filter(exe => exe._id === id);
 
@@ -109,12 +110,12 @@ app.post('/api/exercise/log', (req, res) => {
   
   res.json(responseObject);
 })
+*/
 
 
 
-/*
 app.get('/api/exercise/log', (req, res) => {
-  const { userId, description, duration, date } = req.body;
+  const { userId, description, duration, date } = req.query;
   
   User.findById(req.query.userId, (err, data) => {
     if (!data) {
@@ -122,22 +123,17 @@ app.get('/api/exercise/log', (req, res) => {
     } else {
       const username = data.username;
 
-      
-      Session.find({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}).select(['id', 'description', 'duration', 'date']).limit(+limit).exec( (err, data) => {
-        let customdata = data.map(session => {
-          let formattedDate = new Date(session.date).toDateString();
-          return {_id: session.id, description: session.description, duration: session.duration, date: formattedDate};
-        })
+      Session.find({userId}, {date: {$gte: new Date(req.query.from), $lte: new Date(req.query.to)}}).select(['id', 'description', 'duration', 'date']).limit(+req.query.limit).exec( (err, data) => {
         if (!data) {
           res.json({'_id': userId, 'username': username, 'count': 0, 'log': []});
         } else {
-          res.json({'_id': userId, 'username': username, 'count': data.length, 'log': customdata});
+          res.json({'_id': userId, 'username': username, 'count': data.length, 'log': data.log});
         }
       })
     }
   })
 })
-*/
+
 
 /*
 // Create endpoint to get the user's log
