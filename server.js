@@ -121,8 +121,22 @@ app.get('/api/exercise/log', (req, res) => {
       res.json({'error': 'Unknown userId'});
     } else if (from) {
       const fromDate = new Date(from);
-      log = log.filter(exercise => new Date(exercise.date) > fromDate)
+      let log = User.log.filter(exercise => new Date(exercise.date) > fromDate);
     }
+    if (to) {
+      const toDate = new Date(to);
+      let log = User.log.filter(exercise => new Date(exercise.date) < toDate);
+    }
+    if (limit) {
+      let log = User.log.slice(0, +limit);
+    }
+    
+    res.json({
+      _id: userId,
+      username: data.username,
+      count: data.log.length,
+      log: data.log
+    })
   })
 })
 
