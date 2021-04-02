@@ -110,9 +110,6 @@ app.get('/api/exercise/log', (req, res) => {
       log: log
     };
     
-    if (err) {
-      res.send('error: no userId found');
-    }  else
     if (from) {
       responseObject['count'] = log.filter(el => new Date(el.date) >= new Date(fromDate)).length;
       responseObject['log'] = log.filter(el => new Date(el.date) >= new Date(fromDate));
