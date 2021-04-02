@@ -118,6 +118,7 @@ app.get('/api/exercise/log', (req, res) => {
   
   User.findById(userId, (err, data) => {
     const log = data.log;
+    const newLimit = limit;
     
     if (from) {
       const fromDate = new Date(from);
@@ -128,14 +129,15 @@ app.get('/api/exercise/log', (req, res) => {
       log = log.filter(exercise => new Date(exercise.date) <= toDate);
     }
     if (limit) {
-      log = log.slice(0, limit);
+      log = log.slice(0, +limit);
     }
-    res.json({
-      _id: userId,
-      username: data.username,
-      count: log.length,
-      log: log
-    })
+    res.send(newLimit)
+    // res.json({
+    //   _id: userId,
+    //   username: data.username,
+    //   count: log.length,
+    //   log: log
+    // })
   })
 })
 
