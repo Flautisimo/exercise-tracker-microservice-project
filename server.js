@@ -123,11 +123,12 @@ app.get('/api/exercise/log', (req, res) => {
     } else {
       const username = data.username;
 
-      Session.find({userId}, {date: {$gte: new Date(req.query.from), $lte: new Date(req.query.to)}}).select(['id', 'description', 'duration', 'date']).limit(+req.query.limit).exec( (err, data) => {
+      Session.find({userId}, {date: {$gte: req.query.from, $lte: req.query.to}}).select(['id', 'description', 'duration', 'date']).limit(+req.query.limit).exec( (err, data) => {
         if (!data) {
           res.json({'_id': userId, 'username': username, 'count': 0, 'log': []});
         } else {
-          res.json({'_id': userId, 'username': username, 'count': data.length, 'log': data.log});
+          res.json({data})
+          /*res.json({'_id': userId, 'username': username, 'count': data.length, 'log': data});*/
         }
       })
     }
