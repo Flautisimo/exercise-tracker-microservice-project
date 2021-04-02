@@ -93,11 +93,13 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
   })
 });
 
-/*
+// Custom function
+const getSessionFromUserId
 app.post('/api/exercise/log', (req, res) => {
   const { userId } = req.query;
+  
+  const exercises = getSessionFromUserId(userId);
 })
-*/
 
 
 
@@ -128,6 +130,7 @@ app.get('/api/exercise/log', (req, res) => {
 })
 */
 
+/*
 // Create endpoint to get the user's log
 app.get('/api/exercise/log', (req, res) => {
   // Find user by id using a query
@@ -141,7 +144,7 @@ app.get('/api/exercise/log', (req, res) => {
     }  
   })
 });
-
+*/
 
 
 
