@@ -137,7 +137,7 @@ app.get('/api/exercise/log', (req, res) => {
       _id: userId,
       username: data.username,
       count: log.length,
-      log: data.newLog
+      log
     })
   })
 })
