@@ -95,24 +95,6 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 
 
 
-/*
-app.get('/api/exercise/log', (req, res) => {
-  const { userId, from, to, limit } = req.query;
-  
-  User.findById({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}.limit(+limit).pretty().exec (err, data) => {
-    if (!data) {
-      res.send("Unknown userId")
-    } else {
-      const username = data.username;
-      const session = data.log;
-      
-      res.json(session);
-    
-        })
-      })
-    })
-*/    
-
 app.get('/api/exercise/log', (req, res) => {
   const { userId, from, to, limit } = req.query;
   
@@ -128,7 +110,9 @@ app.get('/api/exercise/log', (req, res) => {
       log: log
     };
     
-  
+    if (!data) {
+      res.json({'error': 'userId not found'});
+    }  
     if (from) {
       responseObject['count'] = log.filter(el => new Date(el.date) >= new Date(fromDate)).length;
       responseObject['log'] = log.filter(el => new Date(el.date) >= new Date(fromDate));
@@ -138,19 +122,10 @@ app.get('/api/exercise/log', (req, res) => {
       responseObject['log'] = log.filter(el => new Date(el.date) <= new Date(toDate));
     }
     if (limit){
-      // responseObject['_id'] = userId;
-      // responseObject['username'] = data.username;
       responseObject['count'] = log.slice(0, newLimit).length;
       responseObject['log'] = log.slice(0, newLimit);
     } 
     res.json(responseObject);
-    
-    // res.json({
-    //   _id: userId,
-    //   username: data.username,
-    //   count: log.length,
-    //   log: log
-    // })
   })
 })
 
