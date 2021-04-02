@@ -99,7 +99,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 app.get('/api/exercise/log', (req, res) => {
   const { userId, from, to, limit } = req.query;
   
-  User.findById({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}.limit(+limit).exec (err, data) => {
+  User.findById({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}.limit(+limit).pretty().exec (err, data) => {
     if (!data) {
       res.send("Unknown userId")
     } else {
@@ -130,13 +130,12 @@ app.get('/api/exercise/log', (req, res) => {
     if (limit) {
       log = log.slice(0, limit);
     }
-    res.json(log)
-    /*res.json({
+    res.json({
       _id: userId,
       username: data.username,
       count: log.length,
       log: log
-    })*/
+    })
   })
 })
 
