@@ -94,7 +94,8 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 });
 
 // Custom function
-const getSessionFromUserId
+const getSessionFromUserId = (id) => 
+
 app.post('/api/exercise/log', (req, res) => {
   const { userId } = req.query;
   
