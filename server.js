@@ -117,7 +117,7 @@ app.post('/api/exercise/log', (req, res) => {
 app.get('/api/exercise/log', (req, res) => {
   const { userId, from, to, limit } = req.query;
   
-  User.findById({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}).limit(+limit).exec( (err, data) => {
+  User.findById({userId}, {date: {$gte: new Date(from), $lte: new Date(to)}}.limit(+limit).exec (err, data) => {
     if (!data) {
       res.send("Unknown userId")
     } else {
@@ -125,8 +125,8 @@ app.get('/api/exercise/log', (req, res) => {
       const session = data.log;
       
       res.json(session);
-
-        }
+    
+        })
       })
     })
 
