@@ -120,25 +120,26 @@ app.get('/api/exercise/log', (req, res) => {
     const log = data.log;
     const newLimit = +limit;
     const fromDate = new Date(from);
-    const toDate = new Date(to);
+    const toDate = to;
     const responseObject = {};
     
+    res.json(typeof toDate)
     // if (from) {
     //   log = log.filter(exercise => new Date(exercise.date) >= fromDate);
     // }
-    if (to) {
-      responseObject['_id'] = userId;
-      responseObject['username'] = data.username;
-      responseObject['count'] = log.find({date: {$lte: toDate}}).length;
-      responseObject['log'] = log.find({date: {$lte: toDate}});
-    }
-    if (limit){
-      responseObject['_id'] = userId;
-      responseObject['username'] = data.username;
-      responseObject['count'] = log.slice(0, newLimit).length;
-      responseObject['log'] = log.slice(0, newLimit);
-    } 
-    res.json(responseObject);
+    // if (to) {
+    //   responseObject['_id'] = userId;
+    //   responseObject['username'] = data.username;
+    //   responseObject['count'] = log.find({date: {$lte: toDate}}).length;
+    //   responseObject['log'] = log.find({date: {$lte: toDate}});
+    // }
+    // if (limit){
+    //   responseObject['_id'] = userId;
+    //   responseObject['username'] = data.username;
+    //   responseObject['count'] = log.slice(0, newLimit).length;
+    //   responseObject['log'] = log.slice(0, newLimit);
+    // } 
+    // res.json(responseObject);
     
     // res.json({
     //   _id: userId,
