@@ -97,13 +97,17 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 const getSessionFromUserId = (id) => Session.filter(exe => exe._id === id);
 
 app.post('/api/exercise/log', (req, res) => {
-  const { userId } = req.query;
+  const userId = req.query.userId;
   
   const log = getSessionFromUserId(userId);
   
   let responseObject = {};
   responseObject['_id'] = userId;
-  responseObject['username'] = 
+  responseObject['username'] = User.username;
+  responseObject['count'] = log.length;
+  responseObject['log'] = log;
+  
+  res.json(responseObject);
 })
 
 
