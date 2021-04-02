@@ -120,7 +120,7 @@ app.get('/api/exercise/log', (req, res) => {
     const log = data.log;
     const newLimit = +limit;
     const fromDate = new Date(from);
-    const toDate = to;
+    const toDate = new Date(to);
     const responseObject = {};
     
     // if (from) {
@@ -129,8 +129,8 @@ app.get('/api/exercise/log', (req, res) => {
     if (to) {
       responseObject['_id'] = userId;
       responseObject['username'] = data.username;
-      responseObject['count'] = log.filter({$gte: new Date(from), $lte: new Date(to)}).length;
-      responseObject['log'] = log.find({$gte: new Date(from), $lte: new Date(to)});
+      responseObject['count'] = log.find({date: {$lte: toDate}}).length;
+      responseObject['log'] = log.find({date: {$lte: toDate}});
     }
     if (limit){
       responseObject['_id'] = userId;
