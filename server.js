@@ -119,9 +119,7 @@ app.get('/api/exercise/log', (req, res) => {
   User.findById(userId, (err, data) => {
     const log = data.log;
     
-    if (!data) {
-      res.json({'error': 'Unknown userId'});
-    } else if (from) {
+    if (from) {
       const fromDate = new Date(from);
       log = log.filter(exercise => new Date(exercise.date) > fromDate);
     }
@@ -130,15 +128,15 @@ app.get('/api/exercise/log', (req, res) => {
       log = log.filter(exercise => new Date(exercise.date) < toDate);
     }
     if (limit) {
-      log = log.slice(0, +limit);
+      let loglimit = log.slice(0, +limit);
     }
-    
-    res.json({
+    res.send(loglimit)
+    /*res.json({
       _id: userId,
       username: data.username,
       count: log.length,
-      log
-    })
+      log: log
+    })*/
   })
 })
 
