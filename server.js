@@ -128,9 +128,9 @@ app.get('/api/exercise/log', (req, res) => {
       log = log.filter(exercise => new Date(exercise.date) <= toDate);
     }
     if (limit) {
-      log = log.slice(0, +limit);
+      log = log.slice(0, limit);
     }
-    res.json({limit})
+    res.json(log)
     /*res.json({
       _id: userId,
       username: data.username,
