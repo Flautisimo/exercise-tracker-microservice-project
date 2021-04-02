@@ -119,23 +119,27 @@ app.get('/api/exercise/log', (req, res) => {
   User.findById(userId, (err, data) => {
     const log = data.log;
     const newLimit = +limit;
-    const fromDate = new Date(from);
+    const fromDate = from;
     const toDate = to;
-    const responseObject = {};
+    const responseObject = {
+      _id: userId,
+      data: data.username,
+      count: log.length,
+      log: log
+    };
     
   
-    // if (from) {
-    //   log = log.filter(exercise => new Date(exercise.date) >= fromDate);
-    // }
+    if (from) {
+      responseObject['count'] = log.filter(el => new Date(el.date) >= new Date(fromDate)).length;
+      responseObject['log'] = log.filter(el => new Date(el.date) >= new Date(fromDate));
+    }
     if (to) {
-      responseObject['_id'] = userId;
-      responseObject['username'] = data.username;
-      // responseObject['count'] = log.filter(el => new Date(el.date) <= new Date(toDate)).length;
+      responseObject['count'] = log.filter(el => new Date(el.date) <= new Date(toDate)).length;
       responseObject['log'] = log.filter(el => new Date(el.date) <= new Date(toDate));
     }
     if (limit){
-      responseObject['_id'] = userId;
-      responseObject['username'] = data.username;
+      // responseObject['_id'] = userId;
+      // responseObject['username'] = data.username;
       responseObject['count'] = log.slice(0, newLimit).length;
       responseObject['log'] = log.slice(0, newLimit);
     } 
