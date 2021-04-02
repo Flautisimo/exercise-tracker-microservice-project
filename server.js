@@ -94,12 +94,16 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 });
 
 // Custom function
-const getSessionFromUserId = (id) => 
+const getSessionFromUserId = (id) => Session.filter(exe => exe._id === id);
 
 app.post('/api/exercise/log', (req, res) => {
   const { userId } = req.query;
   
-  const exercises = getSessionFromUserId(userId);
+  const log = getSessionFromUserId(userId);
+  
+  let responseObject = {};
+  responseObject['_id'] = userId;
+  responseObject['username'] = 
 })
 
 
