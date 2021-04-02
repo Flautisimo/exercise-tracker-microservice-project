@@ -121,11 +121,11 @@ app.get('/api/exercise/log', (req, res) => {
     
     if (from) {
       const fromDate = new Date(from);
-      log = log.filter(exercise => new Date(exercise.date) > fromDate);
+      log = log.filter(exercise => new Date(exercise.date) >= fromDate);
     }
     if (to) {
       const toDate = new Date(to);
-      log = log.filter(exercise => new Date(exercise.date) < toDate);
+      log = log.filter(exercise => new Date(exercise.date) <= toDate);
     }
     if (limit) {
       log = log.slice(0, +limit);
