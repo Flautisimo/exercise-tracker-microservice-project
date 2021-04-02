@@ -94,7 +94,7 @@ app.post('/api/exercise/add', bodyParser.urlencoded({extended: false}), (req, re
 });
 
 
-
+// Create endpoint to get the user's log
 app.get('/api/exercise/log', (req, res) => {
   const { userId, from, to, limit } = req.query;
   
@@ -105,14 +105,14 @@ app.get('/api/exercise/log', (req, res) => {
     const toDate = to;
     const responseObject = {
       _id: userId,
-      data: data.username,
+      username: data.username,
       count: log.length,
       log: log
     };
     
-    if (!data) {
-      res.json({'error': 'userId not found'});
-    }  
+    if (err) {
+      res.send('error: no userId found');
+    }  else
     if (from) {
       responseObject['count'] = log.filter(el => new Date(el.date) >= new Date(fromDate)).length;
       responseObject['log'] = log.filter(el => new Date(el.date) >= new Date(fromDate));
@@ -128,23 +128,6 @@ app.get('/api/exercise/log', (req, res) => {
     res.json(responseObject);
   })
 })
-
-
-/*
-// Create endpoint to get the user's log
-app.get('/api/exercise/log', (req, res) => {
-  // Find user by id using a query
-  User.findById(req.query.userId, (err, data) => {
-    if (!data) {
-      res.send("Unknown userId");
-    } else {
-      res.json({
-        data
-      })
-    }  
-  })
-});
-*/
 
 
 
