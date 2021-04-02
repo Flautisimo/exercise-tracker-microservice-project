@@ -115,7 +115,7 @@ app.post('/api/exercise/log', (req, res) => {
 
 
 app.get('/api/exercise/log', (req, res) => {
-  const { userId, description, duration, date } = req.query;
+  const { userId, from, to, limit } = req.query;
   
   User.findById(req.query.userId, (err, data) => {
     if (!data) {
@@ -123,7 +123,7 @@ app.get('/api/exercise/log', (req, res) => {
     } else {
       const username = data.username;
 
-      Session.find({userId}, {date: {$gte: req.query.from, $lte: req.query.to}}).limit(req.query.limit).exec( (err, data) => {
+      Session.find(req.query.userId, {date: {$gte: new Date(from), $lte: new Date(to)}}).limit(+limit).exec( (err, data) => {
         if (!data) {
           res.json({'error': 'No exercise log found'});
         } else {
