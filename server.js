@@ -129,8 +129,8 @@ app.get('/api/exercise/log', (req, res) => {
     if (to) {
       responseObject['_id'] = userId;
       responseObject['username'] = data.username;
-      responseObject['count'] = log.filter(exercise => new Date(exercise.date) <= toDate).length;
-      responseObject['log'] = log.filter(exercise => new Date(exercise.date) <= toDate);
+      responseObject['count'] = log.filter(exercise => exercise.date <= toDate).length;
+      responseObject['log'] = log.filter(exercise => exercise.date <= toDate);
     }
     if (limit){
       responseObject['_id'] = userId;
@@ -138,7 +138,7 @@ app.get('/api/exercise/log', (req, res) => {
       responseObject['count'] = log.slice(0, newLimit).length;
       responseObject['log'] = log.slice(0, newLimit);
     } 
-    res.json(toDate);
+    res.json(responseObject);
     
     // res.json({
     //   _id: userId,
